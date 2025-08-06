@@ -1,0 +1,27 @@
+name: Generate Snake Game
+
+on:
+  schedule:
+    - cron: "0 0 * * *"  # roda diariamente à meia-noite (UTC)
+  workflow_dispatch:      # permite rodar manualmente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v3
+
+      - name: Gera o Snake
+        uses: Platane/snk@v3
+        with:
+          github_user_name: gabrieldani
+          outputs: |
+            ./output/github-contribution-grid-snake.svg
+
+      - name: Commit e push da animação
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: "generated snake animation"
+          add: "output/github-contribution-grid-snake.svg"
