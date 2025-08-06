@@ -2,8 +2,11 @@ name: Generate Snake Game
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # roda diariamente à meia-noite (UTC)
-  workflow_dispatch:      # permite rodar manualmente
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -19,6 +22,10 @@ jobs:
           github_user_name: gabrieldani
           outputs: |
             ./output/github-contribution-grid-snake.svg
+          color_snake: '#bb9af7'
+          color_dots: '#7aa2f7'
+          color_empty: '#3b4261'
+          background: '#1a1b26'
 
       - name: Commit e push da animação
         uses: EndBug/add-and-commit@v9
